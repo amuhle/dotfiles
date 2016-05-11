@@ -76,7 +76,6 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " Airline settings
-let g:airline_theme = 'powerlinesh'
 let g:airline_powerline_fonts = 1
 let g:Powerline_symbols = 'fancy'
 

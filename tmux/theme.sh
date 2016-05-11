@@ -21,7 +21,7 @@ set -g status-interval 5
 # default statusbar colors
 # set-option -g status-bg colour0
 set-option -g status-fg $tm_color_active
-set-option -g status-bg 0 #default
+set-option -g status-bg 232 #default
 set-option -g status-attr default
 
 # default window title colors
