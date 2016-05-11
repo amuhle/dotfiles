@@ -1,0 +1,103 @@
+filetype off
+set list
+
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'benekastah/neomake'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'matze/vim-move'
+Plug 'Quramy/tsuquyomi'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/vimproc.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+Plug 'Valloric/YouCompleteMe'
+Plug 'vim-scripts/vim-stylus'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'sgur/vim-lazygutter'
+Plug 'digitaltoad/vim-pug'
+
+call plug#end()
+
+set showcmd
+set nowrap
+set tabstop=2 shiftwidth=2
+set expandtab
+set backspace=indent,eol,start
+
+set smartcase
+
+set sw=2
+set ts=2
+
+set guifont=Hack:h12
+colorscheme atom-dark-256
+"colorscheme rdark
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+set relativenumber
+set clipboard=unnamed
+
+" Leader key
+let mapleader = ","
+
+" Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Tsuquyomi
+autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
+autocmd FileType typescript nmap <buffer> <Leader>E <Plug>(TsuquyomiRenameSymbolC)
+
+" NERD Mappings
+map <C-n> :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeFind<CR>
+
+" Tabs Mapping
+map <C-t> :tabnew<CR>
+
+" Don't be stupid!
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" Default mapping
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" Airline settings
+let g:airline_theme = 'powerlinesh'
+let g:airline_powerline_fonts = 1
+let g:Powerline_symbols = 'fancy'
+
+" Identline settings
+let g:indentLine_enabled = 0
+
+" Move lines
+let g:move_key_modifier = 'C'
+
+" Add empty lines without entering normal mode
+map <leader>o o<Esc>
+map <leader>O O<Esc>
+
+" Fzf mappings
+map <leader><leader> :Files<CR>
+map <leader>gf :GitFiles<CR>
+map <leader>gc :Commits<CR>
+map <leader>/ :Lines<CR>
+map <leader>\ :BLines<CR>
+map <leader>b :Buffers<CR>
+
+" Make < > shifts keep selection
+vnoremap < <gv
+vnoremap > >gv
