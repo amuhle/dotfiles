@@ -15,12 +15,23 @@ Plug 'Shougo/vimproc.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-surround'
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-scripts/vim-stylus'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'sgur/vim-lazygutter'
 Plug 'digitaltoad/vim-pug'
+Plug 'rking/ag.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+Plug 'scrooloose/syntastic'
+Plug 'vitalk/vim-simple-todo'
+
 
 call plug#end()
 
