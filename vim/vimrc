@@ -5,6 +5,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'benekastah/neomake'
 Plug 'junegunn/vim-easy-align'
+Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'matze/vim-move'
@@ -25,12 +26,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'sgur/vim-lazygutter'
 Plug 'digitaltoad/vim-pug'
-Plug 'rking/ag.vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic'
 Plug 'vitalk/vim-simple-todo'
+Plug 'lsdr/monokai'
 
 
 call plug#end()
@@ -47,8 +48,8 @@ set sw=2
 set ts=2
 
 set guifont=Hack:h12
-colorscheme atom-dark-256
-"colorscheme rdark
+"colorscheme atom-dark-256
+colorscheme monokai
 
 set nobackup
 set nowritebackup
@@ -111,3 +112,6 @@ map <leader>b :Buffers<CR>
 " Make < > shifts keep selection
 vnoremap < <gv
 vnoremap > >gv
+
+command Greview :Git! diff --staged
+nnoremap <leader>gr :Greview<cr>
