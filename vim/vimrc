@@ -4,6 +4,7 @@ set list
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'benekastah/neomake'
+Plug 'kien/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -15,24 +16,32 @@ Plug 'scrooloose/nerdtree'
 Plug 'Shougo/vimproc.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe'
 Plug 'vim-scripts/vim-stylus'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-airline/vim-airline'
 Plug 'sgur/vim-lazygutter'
 Plug 'digitaltoad/vim-pug'
+""""snippets
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+"Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'vitalk/vim-simple-todo'
 Plug 'lsdr/monokai'
 
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 call plug#end()
 
@@ -97,17 +106,27 @@ let g:indentLine_enabled = 0
 " Move lines
 let g:move_key_modifier = 'C'
 
+let g:UltiSnipsExpandTrigger="<tab>"
+
 " Add empty lines without entering normal mode
 map <leader>o o<Esc>
 map <leader>O O<Esc>
 
-" Fzf mappings
-map <leader><leader> :Files<CR>
+" fzf mappings
 map <leader>gf :GitFiles<CR>
 map <leader>gc :Commits<CR>
 map <leader>/ :Lines<CR>
-map <leader>\ :BLines<CR>
 map <leader>b :Buffers<CR>
+map <leader><leader> :Files<CR>
+map <leader>\ :BLines<CR>
+
+" Bind commands
+command! Q q " Bind :Q to :q
+command! Qall qall
+command! QA qall
+command! E e
+command! W w
+command! Wq wq
 
 " Make < > shifts keep selection
 vnoremap < <gv
