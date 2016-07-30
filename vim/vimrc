@@ -18,6 +18,8 @@ Plug 'Shougo/vimproc.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'vim-ruby/vim-ruby'
+Plug 'ecomba/vim-ruby-refactoring'
+Plug 'sunaku/vim-ruby-minitest'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
@@ -37,10 +39,17 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnipS'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
+Plug 'jelera/vim-javascript-syntax'
 Plug 'vitalk/vim-simple-todo'
 Plug 'lsdr/monokai'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'sheerun/vim-polyglot'
+Plug 'janko-m/vim-test'
+Plug 'mattn/emmet-vim'
+Plug 'Raimondi/delimitMate'
+Plug 'edsono/vim-matchit'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-endwise'
+Plug 'rstacruz/sparkup'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -51,9 +60,11 @@ call plug#end()
 
 set showcmd
 set nowrap
-set tabstop=2 shiftwidth=2
 set expandtab
+set shiftwidth=2
+set tabstop=2
 set backspace=indent,eol,start
+set clipboard=unnamed
 
 set smartcase
 
@@ -119,6 +130,7 @@ let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 
 " better key bindings for UltiSnipsExpandTrigger
@@ -152,3 +164,36 @@ vnoremap > >gv
 
 command Greview :Git! diff --staged
 nnoremap <leader>gr :Greview<cr>
+
+" Copy & Paste
+function! ClipboardYank()
+  call system('pbcopy', @@)
+endfunction
+function! ClipboardPaste()
+  let @@ = system('pbpaste')
+endfunction
+
+vnoremap <silent> y y:call ClipboardYank()<cr>
+vnoremap <silent> d d:call ClipboardYank()<cr>
+nnoremap <silent> p :call ClipboardPaste()<cr>p
+
+"#Minitest completion
+set completefunc=syntaxcomplete#Complete
+
+"Refactoring
+:nnoremap <leader>rap  :RAddParameter<cr>
+:nnoremap <leader>rcpc :RConvertPostConditional<cr>
+:nnoremap <leader>rel  :RExtractLet<cr>
+:vnoremap <leader>rec  :RExtractConstant<cr>
+:vnoremap <leader>relv :RExtractLocalVariable<cr>
+:nnoremap <leader>rit  :RInlineTemp<cr>
+:vnoremap <leader>rrlv :RRenameLocalVariable<cr>
+:vnoremap <leader>rriv :RRenameInstanceVariable<cr>
+:vnoremap <leader>rem  :RExtractMethod<cr>
+
+"TEST
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
