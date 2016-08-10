@@ -37,7 +37,6 @@ Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnipS'
-Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'vitalk/vim-simple-todo'
@@ -50,6 +49,11 @@ Plug 'edsono/vim-matchit'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 Plug 'rstacruz/sparkup'
+Plug 'jiangmiao/auto-pairs'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'cakebaker/scss-syntax'
+Plug 'isRuslan/vim-es6'
+Plug 'justinj/vim-react-snippets'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -67,6 +71,8 @@ set backspace=indent,eol,start
 set clipboard=unnamed
 
 set smartcase
+set autoindent
+set smartindent
 
 set sw=2
 set ts=2
@@ -127,11 +133,7 @@ let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
 
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
-
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
@@ -197,3 +199,4 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
