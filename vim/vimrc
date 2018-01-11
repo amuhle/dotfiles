@@ -1,5 +1,6 @@
 filetype off
-set list
+"set list
+set mouse=a
 filetype plugin indent on
 
 call plug#begin('~/.config/nvim/plugged')
@@ -7,9 +8,14 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'benekastah/neomake'
 Plug 'kien/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'rking/ag.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'matze/vim-move'
 Plug 'Quramy/tsuquyomi'
 Plug 'scrooloose/nerdcommenter'
@@ -37,13 +43,13 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'crusoexia/vim-javascript-lib'
 Plug 'vitalk/vim-simple-todo'
-"Plug 'lsdr/monokai'
+Plug 'lsdr/monokai'
+Plug 'lifepillar/vim-solarized8'
 Plug 'crusoexia/vim-monokai'
 Plug 'sheerun/vim-polyglot'
 Plug 'janko-m/vim-test'
 Plug 'mattn/emmet-vim'
 Plug 'Raimondi/delimitMate'
-Plug 'edsono/vim-matchit'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 Plug 'rstacruz/sparkup'
@@ -52,17 +58,18 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'isRuslan/vim-es6'
 "Plug 'justinj/vim-react-snippets'
 Plug 'burnettk/vim-angular'
-Plug 'marijnh/tern_for_vim'
 """"snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 "Plug 'garbas/vim-snipmate'
 Plug 'ervandew/supertab'
 Plug 'rizzatti/dash.vim'
+Plug 'dkprice/vim-easygrep'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
 endfunction
+
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'nikvdp/ejs-syntax'
 
@@ -86,10 +93,13 @@ set ts=2
 
 set guifont=Hack:h14
 syntax on
+set termguicolors
+"colorscheme solarized8_light_low
 colorscheme monokai
 "colorscheme pyte
+"set background=light
 set t_Co=256  " vim-monokai now only support 256 colours in terminal.
-set background=light
+"gui colors if running iTerm
 
 set nobackup
 set nowritebackup
@@ -114,6 +124,9 @@ nmap <leader>n :NERDTreeFind<CR>
 
 " Tabs Mapping
 map <C-t> :tabnew<CR>
+
+" Tabs Mapping
+nnoremap <leader>f :Ag<Space>
 
 " Don't be stupid!
 "noremap <Up> <NOP>
@@ -191,6 +204,7 @@ nnoremap <silent> p :call ClipboardPaste()<cr>p
 
 "#Minitest completion
 set completefunc=syntaxcomplete#Complete
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 
 "Refactoring
 :nnoremap <leader>rap  :RAddParameter<cr>
