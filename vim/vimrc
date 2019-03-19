@@ -59,12 +59,13 @@ Plug 'isRuslan/vim-es6'
 "Plug 'justinj/vim-react-snippets'
 Plug 'burnettk/vim-angular'
 """"snippets
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'garbas/vim-snipmate'
+Plug 'garbas/vim-snipmate'
 Plug 'ervandew/supertab'
 Plug 'rizzatti/dash.vim'
 Plug 'dkprice/vim-easygrep'
+Plug 'posva/vim-vue'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -91,7 +92,7 @@ set smartindent
 set sw=2
 set ts=2
 
-set guifont=Hack:h14
+set guifont=Hack:h13
 syntax on
 set termguicolors
 "colorscheme solarized8_light_low
