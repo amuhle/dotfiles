@@ -20,7 +20,10 @@ if executable("rg")
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-Plug '~/.fzf' | Plug 'junegunn/fzf.vim'
+"Fuzzy Finder - Works fine for linux, not sure for macosx
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 Plug 'matze/vim-move'
 Plug 'Quramy/tsuquyomi'
 Plug 'scrooloose/nerdcommenter'
