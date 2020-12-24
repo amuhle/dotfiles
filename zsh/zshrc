@@ -46,20 +46,16 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(rails git lol bundler common-aliases osx zsh-completions)
+plugins=(github rails git lol bundler common-aliases)
 autoload -U compinit && compinit
 
 source $ZSH/oh-my-zsh.sh
 
 pathdirs=(
-/usr/local/mysql/bin
 /opt/local/etc
 /opt/local/bin
 /opt/local/sbin
-$HOME/.gem/ruby/1.8/bin
-$HOME/bin
-/Applications/SWI-Prolog.app/Contents/MacOS
-/Applications/Postgres.app/Contents/Versions/9.3/bin
+$HOME/.bin
 )
 
 for dir in $pathdirs; do
@@ -77,36 +73,20 @@ export EDITOR='vim'
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(sublime git ruby bundler github zsh-syntax-highlighting)
-
 # Aliases
 alias zshconfig="vim ~/.zshrc"
 alias reload!="source ~/.zshrc"
 
 #ALIAS
 alias busquelo!='grep -r -n'
-alias migrelo!='rake db:migrate'
-alias sub='sublime-text-2 &'
-alias culpelo!='git blame'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -l'
-alias ..='cd ..'
 alias gen_tags='ctags -R -f .tags'
 alias gs='git status'
 alias gd='git diff'
 alias gfa='git fetch --all'
 alias be='bundle exec'
-alias rb='chruby'
 alias nrs='npm run start'
 alias nrb='npm run build'
 
@@ -121,11 +101,6 @@ alias vim=nvim
 export ANDROID_HOME='/Users/alvaro/development/adt-bundle-mac-x86_64/sdk'
 export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 export PATH="/usr/local/bin:$PATH"
-
-#CHRUBY
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-rb 2.2
-source /usr/local/opt/chruby/share/chruby/auto.sh
 
 export NVM_DIR="/Users/alvaro/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
