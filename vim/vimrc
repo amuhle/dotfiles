@@ -12,8 +12,36 @@ Plug 'kien/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
 
+"Intellisense
+Plug 'hrsh7th/nvim-compe'
+
+" Collection of common configurations for the Nvim LSP client
+Plug 'neovim/nvim-lspconfig'
+
+" Extensions to built-in LSP, for example, providing type inlay hints
+Plug 'nvim-lua/lsp_extensions.nvim'
+
+" Autocompletion framework for built-in LSP
+Plug 'nvim-lua/completion-nvim'
+
 "Hyperfocus-writing in vim
 Plug 'junegunn/limelight.vim'
+
+"Plug 'autozimu/LanguageClient-neovim', {
+    "\ 'branch': 'next',
+    "\ 'do': 'bash install.sh',
+    "\ }
+
+"" Required for operations modifying multiple buffers like rename.
+"set hidden
+
+"let g:LanguageClient_serverCommands = {
+    "\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    "\ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    "\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    "\ 'python': ['/usr/local/bin/pyls'],
+    "\ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+    "\ }
 
 if executable("rg")
   set grepprg=rg\ --vimgrep\ --no-heading
@@ -70,12 +98,12 @@ Plug 'burnettk/vim-angular'
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'rizzatti/dash.vim'
 Plug 'dkprice/vim-easygrep'
 "Plug 'posva/vim-vue'
 "Plug 'airblade/vim-gitgutter'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
 
 function! DoRemote(arg)
@@ -87,13 +115,28 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 call plug#end()
 
+"VimFiles:
+source ~/.config/nvim/vim/lsp-config.vim
+
+"LuaFiles:
+luafile ~/.config/nvim/lua/plugins/compe-config.lua
+luafile ~/.config/nvim/lua/lsp/rust-ls.lua
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" use <Tab> as trigger keys
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
+
 set showcmd
 set nowrap
 set expandtab
 set shiftwidth=2
 set tabstop=2
 set backspace=indent,eol,start
-set clipboard=unnamed
+set clipboard=unnamedplus
 let g:NERDTreeWinPos = "right"
 
 set smartcase
@@ -124,10 +167,6 @@ let mapleader = ","
 
 " Remove trailing whitespace
 autocmd BufWritePre * :%s/\s\+$//e
-
-" Tsuquyomi
-autocmd FileType typescript nmap <buffer> <Leader>e <Plug>(TsuquyomiRenameSymbol)
-autocmd FileType typescript nmap <buffer> <Leader>E <Plug>(TsuquyomiRenameSymbolC)
 
 " Tabs Mapping
 map <C-t> :tabnew<CR>
