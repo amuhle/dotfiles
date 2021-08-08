@@ -24,8 +24,12 @@ Plug 'nvim-lua/lsp_extensions.nvim'
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
 
+" Rust tools
+Plug 'simrat39/rust-tools.nvim'
+
 "Hyperfocus-writing in vim
 Plug 'junegunn/limelight.vim'
+
 
 "Plug 'autozimu/LanguageClient-neovim', {
     "\ 'branch': 'next',
@@ -42,6 +46,7 @@ Plug 'junegunn/limelight.vim'
     "\ 'python': ['/usr/local/bin/pyls'],
     "\ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
     "\ }
+
 
 if executable("rg")
   set grepprg=rg\ --vimgrep\ --no-heading
@@ -97,7 +102,7 @@ Plug 'burnettk/vim-angular'
 """"snippets
 "Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
+"Plug 'garbas/vim-snipmate'
 "Plug 'ervandew/supertab'
 Plug 'rizzatti/dash.vim'
 Plug 'dkprice/vim-easygrep'
@@ -129,6 +134,24 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " use <Tab> as trigger keys
 imap <Tab> <Plug>(completion_smart_tab)
 imap <S-Tab> <Plug>(completion_smart_s_tab)
+
+" Set completeopt to have a better completion experience
+" :help completeopt
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+
+" Code navigation shortcuts
+nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 set showcmd
 set nowrap
