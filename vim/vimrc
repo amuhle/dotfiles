@@ -5,6 +5,11 @@ set shell=zsh
 set mouse=a
 filetype plugin indent on
 
+" Having longer updatetime (default is 4000 ms = 4s ) leads to noticeable
+" delays and poor user experience
+set updatetime=300
+
+
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'benekastah/neomake'
@@ -32,23 +37,8 @@ Plug 'simrat39/rust-tools.nvim'
 "Hyperfocus-writing in vim
 Plug 'junegunn/limelight.vim'
 
-
-"Plug 'autozimu/LanguageClient-neovim', {
-    "\ 'branch': 'next',
-    "\ 'do': 'bash install.sh',
-    "\ }
-
 "" Required for operations modifying multiple buffers like rename.
 "set hidden
-
-"let g:LanguageClient_serverCommands = {
-    "\ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    "\ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    "\ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    "\ 'python': ['/usr/local/bin/pyls'],
-    "\ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-    "\ }
-
 
 if executable("rg")
   set grepprg=rg\ --vimgrep\ --no-heading
@@ -110,8 +100,10 @@ Plug 'rizzatti/dash.vim'
 Plug 'dkprice/vim-easygrep'
 "Plug 'posva/vim-vue'
 "Plug 'airblade/vim-gitgutter'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'rust-lang/rust.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Asynchronouse Lint Engine
+Plug 'dense-analysis/ale'
 
 function! DoRemote(arg)
   UpdateRemotePlugins
@@ -121,6 +113,47 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 "Plug 'nikvdp/ejs-syntax'
 
 call plug#end()
+
+"Rust config
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+
+"CoC config
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
 
 "VimFiles:
 source ~/.config/nvim/vim/lsp-config.vim
@@ -171,7 +204,7 @@ set smartindent
 set sw=2
 set ts=2
 
-set guifont=Hack:h13
+set guifont=Hack:h14
 syntax on
 set termguicolors
 "colorscheme solarized8_light_low
@@ -286,6 +319,15 @@ nnoremap <silent> p :call ClipboardPaste()<cr>p
 "#Minitest completion
 set completefunc=syntaxcomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+"
+" Use ALE and also some plugin 'foobar' as completion sources for all code.
+"call deoplete#custom#option('sources', {
+"\ '_': ['ale'],
+"\})
+
+filetype plugin on
+"set omnifunc=ale#completion#OmniFunc
+set omnifunc=syntaxcomplete#Complete
 
 "Refactoring
 :nnoremap <leader>rap  :RAddParameter<cr>
