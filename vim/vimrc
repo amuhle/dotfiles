@@ -1,7 +1,6 @@
 filetype off
-
 set shell=zsh
-"set list
+set list
 set mouse=a
 filetype plugin indent on
 
@@ -9,110 +8,114 @@ filetype plugin indent on
 " delays and poor user experience
 set updatetime=300
 
-
+" ===== PLUGINS =====
 call plug#begin('~/.config/nvim/plugged')
 
-Plug 'benekastah/neomake'
-Plug 'kien/ctrlp.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'mileszs/ack.vim'
+" === Vim enhancements ===
+"
+" To asynchronously run programs
+Plug 'neomake/neomake'
+" Finder
+Plug 'ctrlpvim/ctrlp.vim'
+" Hyperfocus-writing in vim
+Plug 'junegunn/limelight.vim'
+" Fuzzy Finder - Works fine for linux, not sure for macosx
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Move lines Ctrl + jkhl
+Plug 'matze/vim-move'
+" Comments blocks
+Plug 'scrooloose/nerdcommenter'
+" Shows files tree
+Plug 'scrooloose/nerdtree'
+" Async execution library
+Plug 'Shougo/vimproc.vim'
+" Multiple cursors (C-d)
+Plug 'mg979/vim-visual-multi'
+" Git support (:G)
+Plug 'tpope/vim-fugitive'
+" Opens file on Github
+Plug 'tpope/vim-rhubarb'
+" All about surrundings: parentheses, brackets, quotes, tags, etc.
+Plug 'tpope/vim-surround'
+" Airline theme
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+" Git diff on a file (what lines have been modified)
+Plug 'sgur/vim-lazygutter'
 
+" === Languages Support ===
+"
+" Powerful completion engine
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Asynchronouse Lint Engine
+Plug 'dense-analysis/ale'
+" Ruby language support [syntax highlight, indendation, completion, ,etc.]
+Plug 'vim-ruby/vim-ruby'
+" Javascript Language
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'crusoexia/vim-javascript-lib'
+" Javascript ES6
+Plug 'isRuslan/vim-es6'
 "Intellisense
 Plug 'hrsh7th/nvim-compe'
-
-"Plug 'prabirshrestha/vim-lsp'
-
+" Async Language Server Protocol Plugin
+Plug 'prabirshrestha/vim-lsp'
 " Collection of common configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
-
 " Extensions to built-in LSP, for example, providing type inlay hints
 Plug 'nvim-lua/lsp_extensions.nvim'
-
 " Autocompletion framework for built-in LSP
 Plug 'nvim-lua/completion-nvim'
-
+" Rust file detection, syntax highlighting, formatting,
+Plug 'rust-lang/rust.vim'
 " Rust tools
 Plug 'simrat39/rust-tools.nvim'
+" A collection of language packs
+Plug 'sheerun/vim-polyglot'
+" Run tests for different languages/frameworks
+Plug 'janko-m/vim-test'
+" Web development (html)
+Plug 'mattn/emmet-vim'
+" Lets you write HTML code faster
+Plug 'rstacruz/sparkup'
 
-"Hyperfocus-writing in vim
-Plug 'junegunn/limelight.vim'
+" === Utils ===
+"
+" Todo lists (Adds some mappings)
+Plug 'vitalk/vim-simple-todo'
+" Monokai theme
+Plug 'lsdr/monokai'
+Plug 'crusoexia/vim-monokai'
+" Automatic closing of quotes, parenthesis, brackets, etc.
+Plug 'Raimondi/delimitMate'
+" Helps to end certain structures automatically.
+Plug 'tpope/vim-endwise'
+" Insert or delete brackets, parens, quotes in pairs
+Plug 'jiangmiao/auto-pairs'
+" Track the snippets engine
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine
+Plug 'honza/vim-snippets'
+" Find and replace across multiple files
+Plug 'dkprice/vim-easygrep'
+" Dark powered async completion framework
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
-"" Required for operations modifying multiple buffers like rename.
-"set hidden
+call plug#end()
+" ===== END PLUGINS =====
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
 
 if executable("rg")
   set grepprg=rg\ --vimgrep\ --no-heading
   set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
-
-"Fuzzy Finder - Works fine for linux, not sure for macosx
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-Plug 'matze/vim-move'
-Plug 'Quramy/tsuquyomi'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'Shougo/vimproc.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'vim-ruby/vim-ruby'
-Plug 'ecomba/vim-ruby-refactoring'
-Plug 'sunaku/vim-ruby-minitest'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-rake'
-Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-surround'
-Plug 'vim-scripts/vim-stylus'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'vim-airline/vim-airline'
-Plug 'sgur/vim-lazygutter'
-Plug 'digitaltoad/vim-pug'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'scrooloose/syntastic'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'crusoexia/vim-javascript-lib'
-Plug 'vitalk/vim-simple-todo'
-Plug 'lsdr/monokai'
-Plug 'lifepillar/vim-solarized8'
-Plug 'crusoexia/vim-monokai'
-Plug 'sheerun/vim-polyglot'
-Plug 'janko-m/vim-test'
-Plug 'mattn/emmet-vim'
-Plug 'Raimondi/delimitMate'
-Plug 'alvan/vim-closetag'
-Plug 'tpope/vim-endwise'
-Plug 'rstacruz/sparkup'
-Plug 'jiangmiao/auto-pairs'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'isRuslan/vim-es6'
-"Plug 'justinj/vim-react-snippets'
-Plug 'burnettk/vim-angular'
-""""snippets
-"Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-"Plug 'garbas/vim-snipmate'
-"Plug 'ervandew/supertab'
-Plug 'rizzatti/dash.vim'
-Plug 'dkprice/vim-easygrep'
-"Plug 'posva/vim-vue'
-"Plug 'airblade/vim-gitgutter'
-Plug 'rust-lang/rust.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Asynchronouse Lint Engine
-Plug 'dense-analysis/ale'
-
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-"Plug 'nikvdp/ejs-syntax'
-
-call plug#end()
 
 "Rust config
 let g:rustfmt_autosave = 1
@@ -120,7 +123,6 @@ let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 
 "CoC config
-
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -175,7 +177,7 @@ imap <S-Tab> <Plug>(completion_smart_s_tab)
 " menuone: popup even when there's only one match
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
-set completeopt=menuone,noinsert,noselect
+"set completeopt=menuone,noinsert,noselect
 
 " Code navigation shortcuts
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -207,12 +209,8 @@ set ts=2
 set guifont=Hack:h14
 syntax on
 set termguicolors
-"colorscheme solarized8_light_low
 colorscheme monokai
-"colorscheme pyte
-"set background=light
 set t_Co=256  " vim-monokai now only support 256 colours in terminal.
-"gui colors if running iTerm
 
 set nobackup
 set nowritebackup
@@ -232,27 +230,13 @@ map <C-t> :tabnew<CR>
 " Tabs Mapping
 nnoremap <leader>f :Ag<Space>
 
-" Don't be stupid!
-"noremap <Up> <NOP>
-"noremap <Down> <NOP>
-"noremap <Left> <NOP>
-"noremap <Right> <NOP>
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-m>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-m>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-m>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-let g:multi_cursor_use_default_mapping=0
-
 " NERD Mappings
 map <C-n> :NERDTreeToggle<CR>
 nmap <leader>n :NERDTreeFind<CR>
+
+" Limelight toggle
+nmap <Leader>l <Plug>(Limelight)
+xmap <Leader>l <Plug>(Limelight)
 
 " Airline settings
 let g:airline_powerline_fonts = 1
@@ -329,29 +313,15 @@ filetype plugin on
 "set omnifunc=ale#completion#OmniFunc
 set omnifunc=syntaxcomplete#Complete
 
-"Refactoring
-:nnoremap <leader>rap  :RAddParameter<cr>
-:nnoremap <leader>rcpc :RConvertPostConditional<cr>
-:nnoremap <leader>rel  :RExtractLet<cr>
-:vnoremap <leader>rec  :RExtractConstant<cr>
-:vnoremap <leader>relv :RExtractLocalVariable<cr>
-:nnoremap <leader>rit  :RInlineTemp<cr>
-:vnoremap <leader>rrlv :RRenameLocalVariable<cr>
-:vnoremap <leader>rriv :RRenameInstanceVariable<cr>
-:vnoremap <leader>rem  :RExtractMethod<cr>
-
 "TEST
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-
-
-"LimeLight config
-nmap <Leader>l <Plug>(Limelight)
-xmap <Leader>l <Plug>(Limelight)
 
 "Improves performance when scrolling on big files
 set lazyredraw
 set regexpengine=1
+
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-d>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-d>'           " replace visual C-n
