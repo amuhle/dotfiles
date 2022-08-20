@@ -87,6 +87,9 @@ alias python='python3'
 # Terraform
 alias tf='terraform'
 
+# Bat
+alias cat="bat"
+
 export PATH="/usr/local/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
