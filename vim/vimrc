@@ -44,6 +44,31 @@ Plug 'vim-airline/vim-airline'
 " Git diff on a file (what lines have been modified)
 Plug 'sgur/vim-lazygutter'
 
+" === Utils ===
+"
+" Todo lists (Adds some mappings)
+Plug 'vitalk/vim-simple-todo'
+" Monokai theme
+Plug 'lsdr/monokai'
+Plug 'crusoexia/vim-monokai'
+" Automatic closing of quotes, parenthesis, brackets, etc.
+Plug 'Raimondi/delimitMate'
+" Helps to end certain structures automatically.
+Plug 'tpope/vim-endwise'
+" Insert or delete brackets, parens, quotes in pairs
+Plug 'jiangmiao/auto-pairs'
+" Track the snippets engine
+Plug 'SirVer/ultisnips'
+" Snippets are separated from the engine
+Plug 'honza/vim-snippets'
+" Find and replace across multiple files
+Plug 'dkprice/vim-easygrep'
+" Dark powered async completion framework
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+
 " === Languages Support ===
 "
 " Powerful completion engine
@@ -80,31 +105,6 @@ Plug 'janko-m/vim-test'
 Plug 'mattn/emmet-vim'
 " Lets you write HTML code faster
 Plug 'rstacruz/sparkup'
-
-" === Utils ===
-"
-" Todo lists (Adds some mappings)
-Plug 'vitalk/vim-simple-todo'
-" Monokai theme
-Plug 'lsdr/monokai'
-Plug 'crusoexia/vim-monokai'
-" Automatic closing of quotes, parenthesis, brackets, etc.
-Plug 'Raimondi/delimitMate'
-" Helps to end certain structures automatically.
-Plug 'tpope/vim-endwise'
-" Insert or delete brackets, parens, quotes in pairs
-Plug 'jiangmiao/auto-pairs'
-" Track the snippets engine
-Plug 'SirVer/ultisnips'
-" Snippets are separated from the engine
-Plug 'honza/vim-snippets'
-" Find and replace across multiple files
-Plug 'dkprice/vim-easygrep'
-" Dark powered async completion framework
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
 call plug#end()
 " ===== END PLUGINS =====
@@ -177,7 +177,7 @@ imap <S-Tab> <Plug>(completion_smart_s_tab)
 " menuone: popup even when there's only one match
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
-"set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
 
 " Code navigation shortcuts
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
