@@ -24,15 +24,14 @@ return require('packer').startup({function(use)
         requires = {'kyazdani42/nvim-web-devicons',
         opt = true}
     }
-    --use 'tanvirtin/monokai.nvim'
-    use 'navarasu/onedark.nvim'
+    use 'tanvirtin/monokai.nvim'
+    -- use 'navarasu/onedark.nvim'
 
     -- [[ Dev ]]
     use {
         'nvim-telescope/telescope.nvim',                 -- fuzzy finder
         requires = { {'nvim-lua/plenary.nvim'} }
     }
-
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
 
     use 'majutsushi/tagbar'                         -- code structure
@@ -98,6 +97,9 @@ return require('packer').startup({function(use)
         'm-demare/hlargs.nvim',
         requires = { 'nvim-treesitter/nvim-treesitter' }
     }
+
+    -- Hyper focus
+    use 'junegunn/limelight.vim'
 
     -- for bootstrapping --
     if packer_bootstrap then
