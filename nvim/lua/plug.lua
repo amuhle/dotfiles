@@ -104,6 +104,9 @@ return require('packer').startup({function(use)
     -- Hyper focus
     use 'junegunn/limelight.vim'
 
+    -- Multiple cursors
+    use 'terryma/vim-multiple-cursors'
+
     -- for bootstrapping --
     if packer_bootstrap then
         require('packer').sync()
