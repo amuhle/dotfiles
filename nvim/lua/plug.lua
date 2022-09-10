@@ -48,6 +48,9 @@ return require('packer').startup({function(use)
     -- [[ Rust ]]
     use 'simrat39/rust-tools.nvim'
 
+    -- [[ Kotlin ]]
+    use {'udalov/kotlin-vim', ft = {"kotlin"}, disable = true}
+
    -- Completion framework:
     use 'hrsh7th/nvim-cmp'
 
