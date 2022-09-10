@@ -46,3 +46,7 @@ vim.cmd([[
     nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 ]])
+
+-- Change directory
+map('n', '<leader>cd', ":cd %:p:h<CR>:pwd<CR>", {})
+
