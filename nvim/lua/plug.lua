@@ -49,7 +49,7 @@ return require('packer').startup({function(use)
     use 'simrat39/rust-tools.nvim'
 
     -- [[ Kotlin ]]
-    use {'udalov/kotlin-vim', ft = {"kotlin"}, disable = true}
+    use {'udalov/kotlin-vim', ft = {"kotlin"}, disable = false}
 
    -- Completion framework:
     use 'hrsh7th/nvim-cmp'
@@ -70,9 +70,6 @@ return require('packer').startup({function(use)
 
     -- Inspector --
     use 'puremourning/vimspector'
-
-    -- Terminal --
-    use 'voldikss/vim-floaterm'
 
     -- Indent --
     use 'lukas-reineke/indent-blankline.nvim'
