@@ -49,6 +49,8 @@ opt.guifont = 'Hack:14'
 opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 opt.shortmess = opt.shortmess + { c = true}
 set_option('updatetime', 300)
+set_option('clipboard', 'unnamedplus')
+
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
