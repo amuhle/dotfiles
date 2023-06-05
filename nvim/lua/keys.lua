@@ -8,20 +8,29 @@ map('i', 'jk', '', {})
 map('n', '<C-n>', ":NvimTreeToggle <CR>", {})
 
 -- Toggle more plugins
-map('n', '<leader>l', [[:IndentLinesToggle<CR>]], {})
-map('n', '<leader>t', [[:TagbarToggle<CR>]], {})
-map('n', '<leader><leader>', [[:Telescope find_files<CR>]], {})
-map('n', '<leader>f', [[:Telescope live_grep<CR>]], {})
-map('n', '<leader>b', [[:Telescope buffers<CR>]], {})
+vim.keymap.set('n', '<leader><leader>', require('telescope.builtin').find_files, { desc = 'Search Files' })
+vim.keymap.set('n', '<leader>f',       require('telescope.builtin').live_grep,  { desc = 'Search by Grep' })
+vim.keymap.set('n', '<leader>sh',       require('telescope.builtin').help_tags,  { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw',       require('telescope.builtin').grep_string,  { desc = '[S]earch current [w]ord' })
+vim.keymap.set('n', '<leader>sd',       require('telescope.builtin').diagnostics,  { desc = '[S]earch current [w]ord' })
+vim.keymap.set('n', '<leader>sb',       require('telescope.builtin').buffers,  { desc = '[S]earch existing [B]uffers' })
+
+vim.cmd([[
+    command WQ wq
+    command Wq wq
+    command W w
+    command Q q
+    command Qa qa
+]])
 
 -- Vim inspector
 vim.cmd([[
-    nmap <F9> <cmd>call vimspector#Launch()<cr>
-    nmap <F5> <cmd>call vimspector#StepOver()<cr>
+    nmap <F5> <cmd>call vimspector#Launch()<cr>
+    nmap <F6> <cmd>call vimspector#Continue()<cr>
     nmap <F8> <cmd>call vimspector#Reset()<cr>
-    nmap <F11> <cmd>call vimspector#StepOver()<cr>")
-    nmap <F12> <cmd>call vimspector#StepOut()<cr>")
-    nmap <F10> <cmd>call vimspector#StepInto()<cr>")
+    nmap <F9> <cmd>call vimspector#StepInto()<cr>
+    nmap <F10> <cmd>call vimspector#StepOver()<cr>
+    nmap <F12> <cmd>call vimspector#StepOut()<cr>
 ]])
 
 map('n', "Db", ":call vimspector#ToggleBreakpoint()<cr>", {})

@@ -15,17 +15,26 @@ require('plug')      -- Plugins
 -- PLUGINS
 
 require'nvim-web-devicons'.setup {}
+
+local function nvim_tree_on_attach(bufnr)
+    local api = require "nvim-tree.api"
+
+    local function opts(desc)
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true } 
+    end
+
+    api.config.mappings.default_on_attach(bufnr)
+    
+    vim.keymap.set('n', 't', api.node.open.tab, opts('New Tab'))
+    vim.keymap.set('n', 'v', api.node.open.vertical, opts('Split Vertical'))
+    vim.keymap.set('n', 'x', api.node.open.horizontal, opts('Split Horizontal'))
+end
+
 require('nvim-tree').setup{
+    on_attach = nvim_tree_on_attach,
     sort_by = "case_sensitive",
     view = {
         adaptive_size = true,
-        mappings = {
-            list = {
-                { key = "t", action = "tabnew" },
-                { key = "v", action = "vsplit" },
-                { key = "x", action = "split" },
-            },
-        },
     },
     renderer = {
         group_empty = true,

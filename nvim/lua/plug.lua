@@ -24,12 +24,12 @@ return require('packer').startup({function(use)
         requires = {'kyazdani42/nvim-web-devicons',
         opt = true}
     }
-    use 'tanvirtin/monokai.nvim'
+    use 'tanvirtin/monokai.nvim'                    -- theme 
     -- use 'navarasu/onedark.nvim'
 
     -- [[ Dev ]]
     use {
-        'nvim-telescope/telescope.nvim',                 -- fuzzy finder
+        'nvim-telescope/telescope.nvim',            -- fuzzy finder
         requires = { {'nvim-lua/plenary.nvim'} }
     }
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make'}
